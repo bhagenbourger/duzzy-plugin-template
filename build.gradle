@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '8.3.5'
+}
+
+group = 'io.duzzy.external.plugin'
+version = '0.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+ext {
+    pluginVendor = "Duzzy"
+    pluginTitle = "Duzzy plugin template"
+    pluginDescription = "A template to start to create your own plugin for duzzy"
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Vendor': pluginVendor
+        attributes 'Implementation-Title': pluginTitle
+        attributes 'Implementation-Version': project.version
+        attributes 'Duzzy-Plugin-Group-Id': project.group
+        attributes 'Duzzy-Plugin-Artifact-Id': project.name
+        attributes 'Duzzy-Plugin-Description': pluginDescription
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.0'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
